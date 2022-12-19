@@ -29,19 +29,24 @@ struct Home: View {
     @State private var currentStep = 0
     
     var body: some View {
-        VStack(){
-            NavigationView(){
-                VStack(alignment: .leading){
+        NavigationView(){
+            ScrollView{
+            VStack(alignment: .leading,spacing: 10){
+                
+                    Text("Pets Land")
+                        .font(.largeTitle)
+                        .bold()
+                        .padding(.top, 59.0)
                     Text("Services")
                         .font(.title)
                         .bold()
                         .foregroundColor(Color(red: 0.282, green: 0.282, blue: 0.291))
-                    Button(action :{
-                        
-                        
+                        .padding(.top, 19.0)
+                    NavigationLink(destination:{
+                        MapView()
                         
                     }
-                           , label: {
+                                   , label: {
                         ZStack(alignment: .leading){
                             
                             Map(coordinateRegion: $viewModel.region,
@@ -54,24 +59,21 @@ struct Home: View {
                             
                             RoundedRectangle(cornerRadius: 11, style: .continuous)
                                 .offset(x:1,y:50)
-                                .frame(width: 360,height: 50)
+                                .frame(width: 367,height: 50)
                                 .foregroundColor(Color(red: 0.496, green: 0.708, blue: 0.535))
                                 .overlay(){
                                     Text("Click on the map to explore pets related locations.")
                                         .font(.subheadline)
                                         .foregroundColor(Color.white)
-                                        .offset(x:2,y:50)
+                                        .offset(x:1,y:50)
                                 }
                         }
-                        
                     })
-                  
-                    
                     Text("Adoption Opportunity")
                         .font(.title)
                         .bold()
                         .foregroundColor(Color(red: 0.282, green: 0.282, blue: 0.291))
-                    Spacer()
+                        .padding(.top, 20.0)
                     VStack(){
                         ZStack() {
                             RoundedRectangle(cornerRadius: 11, style: .continuous)
@@ -118,10 +120,8 @@ struct Home: View {
                                                         }
                                                         
                                                     }.padding(.vertical)
-                                                }.padding(1)
-                                                
-                                                
-                                                
+                                                }
+                                                .padding(1)
                                             }
                                         }
                                         
@@ -143,23 +143,23 @@ struct Home: View {
                                             .foregroundColor(Color(red: 0.825, green: 0.921, blue: 0.793))
                                     }
                                 }
-                            }.padding(.top, 200.0)
+                            }
+                            .padding(.top, 200.0)
                         }
                         
                         
                     }
-        
+                    
                     Text("Service Provider?")
                         .font(.title)
                         .bold()
                         .foregroundColor(Color(red: 0.282, green: 0.282, blue: 0.291))
                     HStack{
-                        Button(action :{
-                            
-                            
+                        NavigationLink(destination:{
+                            SignIn()
                             
                         }
-                               , label: {
+                                       , label: {
                             ZStack(){
                                 
                                 RoundedRectangle(cornerRadius: 11, style: .continuous)
@@ -181,16 +181,16 @@ struct Home: View {
                                             
                                         }
                                     
-                                }.padding()
+                                }
+                               .padding()
                             }
                         })
                         
-                        Button(action :{
-                            
-                            
+                        NavigationLink(destination:{
+                            SignUp()
                             
                         }
-                               , label: {
+                                       , label: {
                             ZStack(){
                                 RoundedRectangle(cornerRadius: 11, style: .continuous)
                                     .fill(Color(red: 0.825, green: 0.921, blue: 0.793))
@@ -207,9 +207,7 @@ struct Home: View {
                                                     .frame(width: 36,height: 52)
                                                 Text("SignUp")
                                                     .foregroundColor(Color(red: 0.392, green: 0.646, blue: 0.463))
-                                                //
                                             }
-                                            
                                         }
                                     
                                 }
@@ -217,10 +215,11 @@ struct Home: View {
                         })
                     }
                     
+                    .navigationBarBackButtonHidden(true)
+                    //                .navigationTitle("Pets Land")
                 }.padding()
                 
-                    .navigationTitle("Pets Land")
-            }  
+            }
         }
     }
     

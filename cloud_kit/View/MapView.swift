@@ -18,18 +18,18 @@ struct MapView: View{
     @State var clinc: Bool = false
     @State var servise: Bool = false
     @State var adopt: Bool = false
-
+    
     var body: some View {
-        VStack{
-            NavigationView {
+        NavigationView {
+            VStack{
                 ZStack{
                     Map(coordinateRegion: $viewModel.region,
                         showsUserLocation: true,
                         annotationItems: viewMode2.Learners,
                         annotationContent: { item in
-                            MapAnnotation(coordinate:CLLocationCoordinate2D(latitude: item.coordinates.coordinate.latitude, longitude: item.coordinates.coordinate.longitude),content: {
-                                PinButtonView(pin: item)
-                            })
+                        MapAnnotation(coordinate:CLLocationCoordinate2D(latitude: item.coordinates.coordinate.latitude, longitude: item.coordinates.coordinate.longitude),content: {
+                            PinButtonView(pin: item)
+                        })
                     }
                     )
                     .edgesIgnoringSafeArea(.bottom)
@@ -38,13 +38,13 @@ struct MapView: View{
                         viewModel.checkIfLocationServicesIsEnabled()
                         viewMode2.fetchLearners()
                     }
-                    .navigationTitle("Services")
                     
+
                     VStack{
                         ScrollView(.horizontal){
                             HStack{
                                 Button(action :{
-                                //
+                                    //
                                     
                                     shop.toggle()
                                     clinc = false
@@ -159,17 +159,23 @@ struct MapView: View{
                         }
                         Spacer()
                     }
+                    .navigationTitle("Services")
+                    .navigationBarTitleDisplayMode(.automatic)
                 }
             }
         }
     }
+}
     
     struct MapView_Previews: PreviewProvider {
         static var previews: some View {
             MapView()
         }
     }
-}
+
+
+
+
 struct EditView: View {
     @Environment(\.presentationMode) var presentationMode
     @Binding var pin: Learner
@@ -292,6 +298,7 @@ struct EditView: View {
            
       
             .navigationTitle($pin.name)
+            .font(.headline)
             .navigationBarItems(trailing: Button("Done") {
                 self.presentationMode.wrappedValue.dismiss()
             })

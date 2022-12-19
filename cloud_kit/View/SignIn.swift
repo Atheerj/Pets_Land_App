@@ -17,7 +17,6 @@ struct SignIn: View {
                     .offset(x:-20,y: -50)
                 
                 VStack{
-
                     Text("Email:")
                         .frame(width: 360,alignment: .leading)
                         .foregroundColor(.black)
@@ -85,8 +84,7 @@ struct SignIn: View {
                     Divider()
                         .overlay(.white)
                         .opacity(0.2)
-                    
-                    
+
                     NavigationLink(destination:{
                         Home()
                         
@@ -119,6 +117,7 @@ struct SignIn: View {
                         .offset(y:30)
                     }
                 }
+                .edgesIgnoringSafeArea(.bottom)
             }
             
             .navigationTitle("Sign In")
