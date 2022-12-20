@@ -31,8 +31,8 @@ struct Home: View {
     var body: some View {
         NavigationView(){
             ScrollView{
-            VStack(alignment: .leading,spacing: 10){
-                
+                VStack(alignment: .leading,spacing: 10){
+                    
                     Text("Pets Land")
                         .font(.largeTitle)
                         .bold()
@@ -182,7 +182,7 @@ struct Home: View {
                                         }
                                     
                                 }
-                               .padding()
+                                .padding()
                             }
                         })
                         
@@ -209,12 +209,10 @@ struct Home: View {
                                                     .foregroundColor(Color(red: 0.392, green: 0.646, blue: 0.463))
                                             }
                                         }
-                                    
                                 }
                             }
                         })
                     }
-                    
                     .navigationBarBackButtonHidden(true)
                     //                .navigationTitle("Pets Land")
                 }.padding()
@@ -224,7 +222,6 @@ struct Home: View {
     }
     
 }
-    
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         Home()

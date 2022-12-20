@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "Pets Land.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Pets Land.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

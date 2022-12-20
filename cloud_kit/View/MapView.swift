@@ -13,6 +13,8 @@ import CoreLocation
 struct MapView: View{
     @StateObject var viewModel = ContentViewModel()
     @StateObject var viewMode2 = ViewModel()
+    @State var selectedCatogry: String = ""
+    
     
     @State var shop: Bool = false
     @State var clinc: Bool = false
@@ -25,7 +27,7 @@ struct MapView: View{
                 ZStack{
                     Map(coordinateRegion: $viewModel.region,
                         showsUserLocation: true,
-                        annotationItems: viewMode2.Learners,
+                        annotationItems: showdPins,
                         annotationContent: { item in
                         MapAnnotation(coordinate:CLLocationCoordinate2D(latitude: item.coordinates.coordinate.latitude, longitude: item.coordinates.coordinate.longitude),content: {
                             PinButtonView(pin: item)
@@ -38,19 +40,16 @@ struct MapView: View{
                         viewModel.checkIfLocationServicesIsEnabled()
                         viewMode2.fetchLearners()
                     }
-                    
-
                     VStack{
                         ScrollView(.horizontal){
                             HStack{
                                 Button(action :{
                                     //
-                                    
+                                    selectedCatogry = "Shop"
                                     shop.toggle()
                                     clinc = false
                                     servise = false
                                     adopt = false
-                                    
                                 }
                                        , label: {
                                     ZStack{
@@ -70,8 +69,8 @@ struct MapView: View{
                                             .frame(width: 132,height: 40)
                                     }
                                 })
-                                ///
                                 Button(action :{
+                                    selectedCatogry = "Clinic"
                                     clinc.toggle()
                                     shop = false
                                     servise = false
@@ -99,7 +98,7 @@ struct MapView: View{
                                 
                                 
                                 Button(action :{
-                                    
+                                    selectedCatogry = "Service"
                                     servise.toggle()
                                     shop = false
                                     clinc = false
@@ -127,6 +126,7 @@ struct MapView: View{
                                 })
                                 //
                                 Button(action :{
+                                    selectedCatogry = "Adopt"
                                     adopt.toggle()
                                     shop = false
                                     clinc = false
@@ -165,6 +165,42 @@ struct MapView: View{
             }
         }
     }
+    var shopPins: [Learner]{
+        
+        return viewMode2.Learners.filter{$0.Category == "Shop"}
+    }
+    var shopPins2: [Learner]{
+        
+        return viewMode2.Learners.filter{$0.Category == "Adopt"}
+    }
+    var shopPins3: [Learner]{
+        
+        return viewMode2.Learners.filter{$0.Category == "Clinic"}
+    }
+    var shopPins4: [Learner]{
+        
+        return viewMode2.Learners.filter{$0.Category == "Service"}
+    }
+    
+    var showdPins: [Learner]{
+        switch selectedCatogry{
+        case "Shop":
+            return shopPins
+            
+        case "Adopt":
+            return shopPins2
+            
+        case "Clinic":
+            return shopPins3
+            
+        case "Service":
+            return shopPins4
+            
+        default:
+            return viewMode2.Learners
+        }
+        return viewMode2.Learners
+    }
 }
     
     struct MapView_Previews: PreviewProvider {
@@ -172,9 +208,6 @@ struct MapView: View{
             MapView()
         }
     }
-
-
-
 
 struct EditView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -194,7 +227,7 @@ struct EditView: View {
                     
                     VStack(alignment: .leading, spacing: 6){
                         Text("\(pin.Category)")
-
+                        
                             .fontWeight(.semibold)
                             .font(.system(size: 23))
                         Text("\(pin.phone)")
@@ -204,7 +237,7 @@ struct EditView: View {
                     }
                 }.padding()
                 
-               Text("Open . closes 11:30PM ")
+                Text("Open . closes 11:30PM ")
                     .foregroundColor(Color(red: 0.392, green: 0.646, blue: 0.463))
                     .font(.system(size: 20))
                     .bold()
@@ -212,11 +245,11 @@ struct EditView: View {
                 Text("\(pin.description)")
                     .font(.system(size: 21))
                     .fontWeight(.regular)
-                    
+                
                 Text("Services: ")
-                     .foregroundColor(Color(red: 0.392, green: 0.646, blue: 0.463))
-                     .font(.system(size: 20))
-                     .bold()
+                    .foregroundColor(Color(red: 0.392, green: 0.646, blue: 0.463))
+                    .font(.system(size: 20))
+                    .bold()
                 HStack(alignment: .center, spacing: 8){
                     VStack{
                         Image("Image-1")
@@ -224,7 +257,6 @@ struct EditView: View {
                             .scaledToFill()
                             .frame(width: 60,height: 60)
                             .clipShape(Circle())
-                        //                        .padding(.vertical)
                             .padding(.horizontal,1)
                         
                         Text("Food")
@@ -239,14 +271,12 @@ struct EditView: View {
                             .scaledToFill()
                             .frame(width: 60,height: 60)
                             .clipShape(Circle())
-                        //                        .padding(.vertical)
                             .padding(.horizontal,1)
                         
                         Text("Utilities")
                             .foregroundColor(Color(hue: 1.0, saturation: 0.038, brightness: 0.384))
                             .fontWeight(.regular)
                             .font(.system(size: 14))
-                        
                     }
                     VStack{
                         Image("Image-3")
@@ -254,14 +284,12 @@ struct EditView: View {
                             .scaledToFill()
                             .frame(width: 60,height: 60)
                             .clipShape(Circle())
-                        //                        .padding(.vertical)
                             .padding(.horizontal,1)
                         
                         Text("Clinic")
                             .foregroundColor(Color(hue: 1.0, saturation: 0.038, brightness: 0.384))
                             .fontWeight(.regular)
                             .font(.system(size: 14))
-                        
                     }
                     VStack{
                         Image("Image-4")
@@ -269,14 +297,12 @@ struct EditView: View {
                             .scaledToFill()
                             .frame(width: 60,height: 60)
                             .clipShape(Circle())
-                        //                        .padding(.vertical)
                             .padding(.horizontal,1)
                         
                         Text("Tech")
                             .foregroundColor(Color(hue: 1.0, saturation: 0.038, brightness: 0.384))
                             .fontWeight(.regular)
                             .font(.system(size: 14))
-                        
                     }
                     VStack{
                         Image("Image-5")
@@ -290,18 +316,16 @@ struct EditView: View {
                             .foregroundColor(Color(hue: 1.0, saturation: 0.038, brightness: 0.384))
                             .fontWeight(.regular)
                             .font(.system(size: 14))
-                        
                     }
                 }.padding()
                 Spacer()
             }.padding()
-           
-      
-            .navigationTitle($pin.name)
-            .font(.headline)
-            .navigationBarItems(trailing: Button("Done") {
-                self.presentationMode.wrappedValue.dismiss()
-            })
+            
+                .navigationTitle($pin.name)
+                .font(.headline)
+                .navigationBarItems(trailing: Button("Done") {
+                    self.presentationMode.wrappedValue.dismiss()
+                })
         }
     }
 }
