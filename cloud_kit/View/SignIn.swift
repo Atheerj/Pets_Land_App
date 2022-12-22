@@ -11,19 +11,19 @@ struct SignIn: View {
     var body: some View {
         NavigationView(){
             
-            VStack {
+            VStack(alignment: .center){
                 Image("Logo")
                     .resizable()
                     .frame(width:144, height:144)
-                    .offset(x:-20,y: -50)
+//                    .offset(x:-20,y: -50)
                 
-                VStack{
+                VStack(){
                     Text("Email")
                         .frame(width: 360,alignment: .leading)
                         .foregroundColor(.black)
                         .font(.system(size: 16))
-                        .padding(.vertical,0)
-                        .offset(x:-4,y:10)
+//                        .padding(.vertical,0)
+//                        .offset(x:-4,y:10)
                     HStack {
                         Image(systemName: "envelope")
                             .foregroundColor(Color(red: 0.392, green: 0.646, blue: 0.463))
@@ -76,23 +76,22 @@ struct SignIn: View {
                             .foregroundColor(Color(red: 0.392, green: 0.646, blue: 0.463))
                         Text("Remember Me")
                             .foregroundColor(Color.gray)
-                            .offset(y:-1)
+//                            .offset(y:-1)
                             .font(.system(size: 12))
                         
                     }
                     Text("Forgot Password?")
                         .foregroundColor(Color(red: 0.392, green: 0.646, blue: 0.463))
-                        .offset(y:-1)
+//                        .offset(y:-1)
                         .font(.system(size: 12))
                     
                 }
-                
                 Divider()
                     .overlay(.white)
                     .opacity(0.2)
                 
-                NavigationLink(destination:{
-                    Home()
+                Button(action:{
+//                    Home()
                     
                 }, label: {
                     Text("Sign In")
@@ -101,18 +100,18 @@ struct SignIn: View {
                         .frame(width: 296, height: 40)
                         .background(Color(red: 0.392, green: 0.646, blue: 0.463))
                         .cornerRadius(8)
-                        .offset(y:30)
+//                        .offset(y:30)
                         .font(.system(size: 18))
                     
                 })
                 HStack{
                     Text("Don’t have an account? ")
                         .foregroundColor(.gray)
-                        .offset(y:30)
+//                        .offset(y:30)
                         .font(.system(size: 14))
                     
-                    NavigationLink(destination:{
-                        SignUp()
+                    Button(action: {
+//                        SignUp()
                         
                     }, label: {
                         Text("Sign up")
@@ -121,16 +120,14 @@ struct SignIn: View {
                             .offset(y:-1)
                             .font(.system(size: 14))
                     })
-                    .offset(y:30)
+//                    .offset(y:30)
                 }
             }
             .edgesIgnoringSafeArea(.bottom)
             .navigationTitle("Sign In")
         }
     }
-    
 }
-
     struct SignIn_Previews: PreviewProvider {
         static var previews: some View {
             SignIn()

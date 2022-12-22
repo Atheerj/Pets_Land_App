@@ -159,7 +159,7 @@ struct Home: View {
                             SignIn()
                             
                         }
-                                       , label: {
+                            , label: {
                             ZStack(){
                                 
                                 RoundedRectangle(cornerRadius: 11, style: .continuous)
@@ -188,9 +188,8 @@ struct Home: View {
                         
                         NavigationLink(destination:{
                             SignUp()
-                            
                         }
-                                       , label: {
+                            , label: {
                             ZStack(){
                                 RoundedRectangle(cornerRadius: 11, style: .continuous)
                                     .fill(Color(red: 0.825, green: 0.921, blue: 0.793))

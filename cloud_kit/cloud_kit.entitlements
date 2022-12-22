@@ -6,7 +6,8 @@
 	<string>development</string>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
-		<string>iCloud.Pins_Location</string>
+		<string>iCloud.Pins-Location</string>
+		<string>iCloud.com.dana.Pets-Land</string>
 	</array>
 	<key>com.apple.developer.icloud-services</key>
 	<array>
